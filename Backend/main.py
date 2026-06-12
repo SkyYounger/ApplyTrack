@@ -2,7 +2,7 @@ import schemas
 import models
 from models import Application
 from database import engine
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from database import SessionLocal
 
 models.Base.metadata.create_all(bind=engine)
@@ -30,6 +30,9 @@ def get_application(application_id: int):
 
     db.close()
 
+    if application is None:
+        raise HTTPException(status_code=404, detail="Application not found")
+
     return application
 
 @app.post("/applications")
@@ -53,4 +56,54 @@ def create_application(application: schemas.ApplicationCreate):
     db.close()
 
     return new_application
+
+@app.delete("/applications")
+def delete_application(application_id: int):
+    db = SessionLocal()
+
+    application = db.query(Application).filter(
+        Application.id == application_id
+    ).first()
+
+    if application is None:
+        db.close()
+        raise HTTPException(status_code=404, detail="Application not found")
+    
+    db.delete(application)
+    db.commit()
+    db.close()
+
+    return {"message": "Application deleted successfully"}
+
+@app.put("/applicatons")
+def update_application(
+    application_id: int,
+    updated_application: schemas.ApplicationCreate
+    ):
+
+    db = SessionLocal()
+
+    application = db.query(Application).filter(
+        Application.id == application_id
+    ).first()
+
+    if application is None:
+        db.close
+        raise HTTPException(status_code=404, detail="Application not found")
+    
+    application.company = updated_application.company
+    application.job_title = updated_application.job_title
+    application.status = updated_application.status
+    application.salary = updated_application.salary
+    application.location = updated_application.location
+    application.date_applied = updated_application.date_applied
+    application.job_link = updated_application.job_link
+    application.notes = updated_application.notes
+
+    db.commit()
+    db.refresh(application)
+    db.close()
+
+    return application
+    
 
