@@ -4,10 +4,19 @@ from models import Application
 from database import engine
 from fastapi import FastAPI, HTTPException
 from database import SessionLocal
+from fastapi.middleware.cors import CORSMiddleware
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 @app.get("/applications")
 def get_applications():
