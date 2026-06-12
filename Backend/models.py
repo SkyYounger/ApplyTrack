@@ -15,3 +15,4 @@ class Application(Base):
     date_applied = Column(String)
     job_link = Column(String)
     notes = Column(String)
+
