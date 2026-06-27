@@ -1,47 +1,69 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #010911;
+  color: white;
 }
 
 .container {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 8%;
 }
 
-.card {
-  background: white;
-  padding: 16px;
+.card,
+.application-card {
+  background: #101827;
+  color: white;
+  padding: 18px;
   margin-bottom: 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+  border-radius: 10px;
+  border: 1px solid #263244;
 }
 
 .stats{
   display:grid;
   grid-template-columns: repeat(5,1fr);
-  gap: 12px;
-  margin: 24 0;
+  gap: 16px;
+  margin: 24px 0;
 }
 
 form {
   display: grid;
-  gap: 10px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
 }
 
-input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+input,
+select {
+  padding: 12px;
+  border: 1px solid #252f3d;
+  border-radius: 8px;
+  background: #111827;
+  color: white;
 }
 
 button {
-  padding: 10px;
+  padding: 12px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
+  background: #2563eb;
+  color: white;
+}
+
+form button {
+  grid-column: span 2;
+}
+
+a {
+  color: #93c5fd;
+  text-decoration: none;
 }
 
 .status {
@@ -49,6 +71,8 @@ button {
   border-radius: 20px;
   font-weight: bold;
   display: inline-block;
+  text-transform: capitalize;
+  text-align: center;
 }
 
 .applied {
@@ -65,4 +89,76 @@ button {
 
 .rejected {
   background-color: #c62828;
+}
+
+.application-card{
+  margin-bottom: 16px;
+}
+
+.application-main{
+  display: grid;
+  grid-template-columns: 1.5fr 2fr auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.application-main h3 {
+  margin: 0 0 6px;
+}
+
+.application-main p {
+  margin: 0;
+  color: #94a3b8;
+}
+
+.application-details {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.application-details span {
+  background: #182235;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #cbd5e1;
+}
+
+.application-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #263244;
+}
+
+.delete-btn {
+  background: #dc2626;
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+}
+
+.delete-btn:hover {
+  background: #7f1d1d;
+}
+
+.status.applied {
+  background: #14532d;
+  color: #86efac;
+}
+
+.status.interviewing {
+  background: #1e3a8a;
+  color: #93c5fd;
+}
+
+.status.offer {
+  background: #7c2d12;
+  color: #fdba74;
+}
+
+.status.rejected {
+  background: #7f1d1d;
+  color: #fca5a5;
 }

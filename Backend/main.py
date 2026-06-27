@@ -66,7 +66,7 @@ def create_application(application: schemas.ApplicationCreate):
 
     return new_application
 
-@app.delete("/applications")
+@app.delete("/applications/{application_id}")
 def delete_application(application_id: int):
     db = SessionLocal()
 
@@ -97,7 +97,7 @@ def update_application(
     ).first()
 
     if application is None:
-        db.close
+        db.close()
         raise HTTPException(status_code=404, detail="Application not found")
     
     application.company = updated_application.company
