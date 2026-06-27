@@ -18,6 +18,13 @@ body {
   border: 1px solid #ddd;
 }
 
+.stats{
+  display:grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 12px;
+  margin: 24 0;
+}
+
 form {
   display: grid;
   gap: 10px;
@@ -35,4 +42,27 @@ button {
   border: none;
   border-radius: 6px;
   cursor: pointer;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.applied {
+  background-color: #2e7d32;
+}
+
+.interviewing {
+  background-color: #1565c0;
+}
+
+.offer {
+  background-color: #ef6c00;
+}
+
+.rejected {
+  background-color: #c62828;
 }
