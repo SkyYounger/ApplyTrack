@@ -162,3 +162,15 @@ a {
   background: #7f1d1d;
   color: #fca5a5;
 }
+
+.status-select {
+  border: none;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}

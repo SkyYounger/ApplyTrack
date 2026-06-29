@@ -84,7 +84,7 @@ def delete_application(application_id: int):
 
     return {"message": "Application deleted successfully"}
 
-@app.put("/applicatons")
+@app.put("/applications/{application_id}")
 def update_application(
     application_id: int,
     updated_application: schemas.ApplicationCreate

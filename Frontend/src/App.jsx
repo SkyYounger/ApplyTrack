@@ -15,6 +15,19 @@ function App() {
     notes: "",
   })
 
+  const [editFormData, setEditFormData] = useState({
+    company: "",
+    job_title: "",
+    status: "applied",
+    salary: "",
+    location: "",
+    date_applied: "",
+    job_link: "",
+    notes: "",
+  })
+
+  const [editingApplication, setEditingApplication] = useState(null)
+
   const totalApplications = applications.length
 
   const applied = applications.filter(
@@ -43,6 +56,13 @@ function App() {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
+    })
+  }
+
+  function handleEditChange(event) {
+    setEditFormData({
+      ...editFormData,
+      [event.target.name]: event.target.value
     })
   }
 
@@ -82,6 +102,66 @@ function App() {
       )
     })
   }
+
+  function handleEditClick(application) {
+    setEditingApplication(application)
+
+    setEditFormData({
+      company: application.company,
+      job_title: application.job_title,
+      status: application.status,
+      salary: application.salary,
+      location: application.location,
+      date_applied: application.date_applied,
+      job_link: application.job_link,
+      notes: application.notes,
+    })
+  }
+
+  function handleEditSubmit(event) {
+    event.preventDefault()
+
+    fetch (`http://127.0.0.1:8000/applications/${editingApplication.id}`, {
+      method: "PUT", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(editFormData),
+    })
+      .then((response) => response.json())
+      .then((updatedApplication) => {
+        setApplications(
+          applications.map((application) =>
+          application.id === updatedApplication.id ? updatedApplication: application
+        )
+        )
+        setEditingApplication(null)
+      })
+  }
+
+  function handleStatusUpdate(id, newStatus, application) {
+    const updatedApplication = {
+      ...application,
+      status: newStatus,
+    }
+
+    fetch(`http://127.0.0.1:8000/applications/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedApplication),
+    })
+      .then((response) => response.json())
+      .then((updatedData) => {
+        setApplications(
+          applications.map((app) =>
+            app.id === id ? updatedData : app
+          )
+        )
+      })
+  }
+   
 
   return (
     <div className="container">
@@ -181,6 +261,47 @@ function App() {
 
       <h2>Applications</h2>
 
+      {editingApplication && (
+        <form onSubmit={handleEditSubmit}>
+          <input
+            name="company"
+            value={editFormData.company}
+            onChange={handleEditChange}
+          />
+
+          <input
+            name="job_title"
+            value={editFormData.job_title}
+            onChange={handleEditChange}
+          />
+
+          <input
+            name="location"
+            value={editFormData.location}
+            onChange={handleEditChange}
+          />
+
+          <select
+            name="status"
+            value={editFormData.status}
+            onChange={handleEditChange}
+          >
+            <option value="applied">Applied</option>
+            <option value="interviewing">Interviewing</option>
+            <option value="offer">Offer</option>
+            <option value="rejected">Rejected</option>
+          </select>
+
+          <button type="submit">
+            Save Changes
+          </button>
+
+          <button type="button" onClick={() => setEditingApplication(null)}>
+            Cancel
+          </button>
+        </form>
+      )}
+
       {applications.map((application) => (
         <div className="application-card" key={application.id}>
           <div className="application-main">
@@ -195,9 +316,21 @@ function App() {
               <span>📅 {application.date_applied || "No date"}</span>
             </div>
 
-            <span className={`status ${application.status}`}>
-              {application.status}
-            </span>
+            <div>
+              <select
+                className={`status status-select ${application.status}`}
+                value={application.status}
+                onChange={(event) =>
+                  handleStatusUpdate(application.id, event.target.value, application)
+                }
+              >
+                <option value="applied">APPLIED</option>
+                <option value="interviewing">INTERVIEWING</option>
+                <option value="offer">OFFER</option>
+                <option value="rejected">REJECTED</option>
+              </select>
+            </div>
+
           </div>
 
           <div className="application-actions">
@@ -208,13 +341,18 @@ function App() {
             >
               🔗 View Job Posting
             </a>
+            <div className="action-buttons">
+              <button onClick={() => handleEditClick(application)}>
+                Edit
+              </button>
 
-            <button
-              className="delete-btn"
-              onClick={() => handleDelete(application.id)}
-            >
-              Delete
-            </button>
+              <button
+                className="delete-btn"
+                onClick={() => handleDelete(application.id)}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         </div>
       ))}
