@@ -174,3 +174,10 @@ a {
   display: flex;
   gap: 10px;
 }
+
+.application-notes {
+  color: cbd5e1;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 16px 0 0;
+}

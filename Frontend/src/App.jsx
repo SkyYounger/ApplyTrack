@@ -361,6 +361,12 @@ function App() {
 
           </div>
 
+          {application.notes && (
+            <p className="application-notes">
+               📝 {application.notes}
+            </p>
+          )}
+
           <div className="application-actions">
             <a
               href={application.job_link}
