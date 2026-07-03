@@ -292,6 +292,34 @@ function App() {
             <option value="rejected">Rejected</option>
           </select>
 
+          <input
+            name="salary"
+            placeholder="Salary"
+            value={editFormData.salary}
+            onChange={handleEditChange}
+          />
+
+          <input 
+          type="date"
+          name="date_applied"
+          value={editFormData.date_applied}
+          onChange={handleEditChange} 
+          />
+
+          <input 
+          name="job_link"
+          placeholder="Job Link"
+          value={editFormData.job_link}
+          onChange={handleEditChange}
+          />
+
+          <input 
+          name="notes"
+          placeholder="Notes"
+          value={editFormData.notes}
+          onChange={handleEditChange}
+           />
+
           <button type="submit">
             Save Changes
           </button>
