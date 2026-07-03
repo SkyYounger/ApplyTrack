@@ -9,3 +9,13 @@ body,
 body {
   background: #010911;
 }
+
+.search-section {
+  margin: 20px 0 28px;
+}
+
+.search-input {
+  width: 110%;
+  max-width: 420px;
+  margin-bottom: 20px;
+}

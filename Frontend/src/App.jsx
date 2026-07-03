@@ -30,6 +30,8 @@ function App() {
 
   const totalApplications = applications.length
 
+  const [searchTerm, setSearchTerm] = useState("")
+
   const applied = applications.filter(
     (application) => application.status.toLowerCase() === "applied"
   ).length
@@ -45,6 +47,13 @@ function App() {
   const rejected = applications.filter(
     (application) => application.status.toLowerCase() === "rejected"
   ).length
+
+  const filteredApplications = applications.filter((application) =>
+    application.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    application.job_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    application.location.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/applications")
@@ -261,6 +270,15 @@ function App() {
 
       <h2>Applications</h2>
 
+      <div className="search-sectionL">
+          <input
+        className="search-input"
+        placeholder="Search applications..."
+        value={searchTerm}
+        onChange={(event) => setSearchTerm(event.target.value)}
+      />
+      </div>
+      
       {editingApplication && (
         <form onSubmit={handleEditSubmit}>
           <input
@@ -330,7 +348,7 @@ function App() {
         </form>
       )}
 
-      {applications.map((application) => (
+      {filteredApplications.map((application) => (
         <div className="application-card" key={application.id}>
           <div className="application-main">
             <div>
