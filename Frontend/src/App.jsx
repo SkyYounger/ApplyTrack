@@ -84,6 +84,10 @@ function App() {
     return 0
   })
 
+  const recentApplications = [...applications]
+    .sort((a, b) => new Date(b.date_applied) - Date(a.date_applied))
+    .slice(0, 3)
+
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/applications")
@@ -232,6 +236,18 @@ function App() {
           <h2>{rejected}</h2>
           <p>Rejected</p>
         </div>
+      </div>
+
+      <h2>Recently Applied</h2>
+
+      <div className="recent-list">
+        {recentApplications.map((application) => (
+          <div className="recent-card" key={application.id}>
+            <h3>{application.company}</h3>
+            <p>{application.job_title}</p>
+            <span>{application.date_applied || "No date"}</span>
+          </div>
+        ))}
       </div>
 
       <form onSubmit={handleSubmit}>
