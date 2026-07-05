@@ -373,6 +373,17 @@ function App() {
         </form>
       )}
 
+      <p className="results-count">
+        Showing {filteredApplications.length} of {applications.length} applications
+      </p>
+
+      {filteredApplications.length === 0 && (
+        <div className="empty-state">
+          <h3> No applications found</h3>
+          <p> Try changing your search or selected filter</p>
+        </div>
+      )}
+
       {filteredApplications.map((application) => (
         <div className="application-card" key={application.id}>
           <div className="application-main">

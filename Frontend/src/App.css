@@ -136,7 +136,7 @@ a {
 .delete-btn {
   background: #dc2626;
   border: 1px solid #ef4444;
-  color: #fca5a5;
+  color: #ffffff;
 }
 
 .delete-btn:hover {
@@ -218,4 +218,18 @@ a {
 .filter-buttons button:hover {
   color: white;
   background: transparent;
+}
+
+.results-count {
+  color: #94a3b8;
+  margin-bottom: 16px;
+}
+
+.empty-state {
+  background: #101827;
+  border: 1px dashed #334155;
+  padding: 32px;
+  border-radius: 10px;
+  text-align: center;
+  color: #94a3b8;
 }
