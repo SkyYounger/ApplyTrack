@@ -187,8 +187,8 @@ a {
 }
 
 .search-input {
-  width: 110%;
-  max-width: 420px;
+  width: 100%;
+  max-width: 500px;
 }
 
 .filter-buttons {
@@ -213,6 +213,7 @@ a {
 .filter-buttons button.active-filter {
   color: white;
   border-bottom: 2px solid #3b82f6;
+  font-weight: 600;
 }
 
 .filter-buttons button:hover {
@@ -232,4 +233,17 @@ a {
   border-radius: 10px;
   text-align: center;
   color: #94a3b8;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.sort-select {
+  width: 180px;
+  background: #182235;
+  border: 1px solid;
 }

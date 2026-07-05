@@ -34,6 +34,8 @@ function App() {
 
   const [statusFilter, setStatusFilter] = useState("all")
 
+  const [sortOption, setSortOption] = useState("newest")
+
   const applied = applications.filter(
     (application) => application.status.toLowerCase() === "applied"
   ).length
@@ -60,6 +62,26 @@ function App() {
       statusFilter === "all" || application.status === statusFilter
 
     return matchesSearch && matchesStatus
+  })
+
+  const sortedApplications = [...filteredApplications].sort((a, b) => {
+    if (sortOption === "newest") {
+      return new Date(b.date_applied) - new Date(a.date_applied)
+    }
+  
+    if(sortOption === "oldest") {
+      return new Date(a.date_applied) - new Date(b.date_applied)
+    }
+
+    if (sortOption === "company") {
+      return a.company.localeCompare(b.company)
+    }
+
+    if (sortOption === "salary") {
+      return Number(b.salary) - Number(a.salary)
+    }
+
+    return 0
   })
 
 
@@ -285,23 +307,36 @@ function App() {
             value={searchTerm}
             onChange={(event) => setSearchTerm(event.target.value)}
           />
-          <div className="filter-buttons">
-            <button 
-            className={statusFilter === "all" ? "active-filter" : ""} 
-            onClick={() => setStatusFilter("all")}>All</button>
-            <button 
-            className={statusFilter === "applied" ? "active-filter" : ""} 
-            onClick={() => setStatusFilter("applied")}>Applied</button>
-            <button 
-            className={statusFilter === "interviewing" ? "active-filter" : ""} 
-            onClick={() => setStatusFilter("interviewing")}>Interviewing</button>
-            <button 
-            className={statusFilter === "offer" ? "active-filter" : ""} 
-            onClick={() => setStatusFilter("offer")}>Offer</button>
-            <button 
-            className={statusFilter === "rejected" ? "active-filter" : ""} 
-            onClick={() => setStatusFilter("rejected")}>Rejected</button>
-          </div>
+          <div className="toolbar">
+            <div className="filter-buttons">
+              <button 
+              className={statusFilter === "all" ? "active-filter" : ""} 
+              onClick={() => setStatusFilter("all")}>All</button>
+              <button 
+              className={statusFilter === "applied" ? "active-filter" : ""} 
+              onClick={() => setStatusFilter("applied")}>Applied</button>
+              <button 
+              className={statusFilter === "interviewing" ? "active-filter" : ""} 
+              onClick={() => setStatusFilter("interviewing")}>Interviewing</button>
+              <button 
+              className={statusFilter === "offer" ? "active-filter" : ""} 
+              onClick={() => setStatusFilter("offer")}>Offer</button>
+              <button 
+              className={statusFilter === "rejected" ? "active-filter" : ""} 
+              onClick={() => setStatusFilter("rejected")}>Rejected</button>
+            </div>
+
+            <select
+              className="sort-select"
+              value={sortOption}
+              onChange={(event) => setSortOption(event.target.value)}
+            >
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="company">Company A-Z</option>
+              <option value="salary">Salary high to low</option>
+            </select>
+          </div>  
       </div>
       
       {editingApplication && (
@@ -384,7 +419,7 @@ function App() {
         </div>
       )}
 
-      {filteredApplications.map((application) => (
+      {sortedApplications.map((application) => (
         <div className="application-card" key={application.id}>
           <div className="application-main">
             <div>
