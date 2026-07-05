@@ -176,8 +176,46 @@ a {
 }
 
 .application-notes {
-  color: cbd5e1;
+  color:#cbd5e1;
   padding: 12px;
   border-radius: 8px;
   margin: 16px 0 0;
+}
+
+.search-section {
+  margin: 20px 0 28px;
+}
+
+.search-input {
+  width: 110%;
+  max-width: 420px;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.filter-buttons button {
+  background: transparent;
+  border: none;
+  color: #94a4b8;
+  padding: 8px 0;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.filter-buttons button.active-filter {
+  color: white;
+  border-bottom: 2px solid #3b82f6;
+}
+
+.filter-buttons button:hover {
+  color: white;
+  background: transparent;
 }
