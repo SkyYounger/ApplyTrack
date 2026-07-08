@@ -1,5 +1,9 @@
 import "./App.css"
 import { useEffect, useState } from "react"
+import {Routes, Route} from "react-router-dom"
+import Dashboard from "./pages/Dashboard"
+import Applications from "./pages/Applications"
+import Navbar from "./components/Navbar"
 
 function App() {
   const [applications, setApplications] = useState([])
@@ -85,7 +89,7 @@ function App() {
   })
 
   const recentApplications = [...applications]
-    .sort((a, b) => new Date(b.date_applied) - Date(a.date_applied))
+    .sort((a, b) => new Date(b.date_applied) - new Date(a.date_applied))
     .slice(0, 3)
 
 
@@ -207,295 +211,32 @@ function App() {
    
 
   return (
-    <div className="container">
-      <h1>ApplyTrack</h1>
-      <p>Job Application Tracker</p>
 
-      <div className="stats">
-        <div className="card">
-          <h2>{totalApplications}</h2>
-          <p>Total</p>
-        </div>
+  <div className="container">
+    <Navbar />
 
-        <div className="card">
-          <h2>{applied}</h2>
-          <p>Applied</p>
-        </div>
-
-        <div className="card">
-          <h2>{interviewing}</h2>
-          <p>Interviewing</p>
-        </div>
-
-        <div className="card">
-          <h2>{offers}</h2>
-          <p>Offers</p>
-        </div>
-
-        <div className="card">
-          <h2>{rejected}</h2>
-          <p>Rejected</p>
-        </div>
-      </div>
-
-      <h2>Recently Applied</h2>
-
-      <div className="recent-list">
-        {recentApplications.map((application) => (
-          <div className="recent-card" key={application.id}>
-            <h3>{application.company}</h3>
-            <p>{application.job_title}</p>
-            <span>{application.date_applied || "No date"}</span>
-          </div>
-        ))}
-      </div>
-
-      <form onSubmit={handleSubmit}>
-        <input
-          name="company"
-          placeholder="Company"
-          value={formData.company}
-          onChange={handleChange}
-        />
-
-        <input
-          name="job_title"
-          placeholder="Job Title"
-          value={formData.job_title}
-          onChange={handleChange}
-        />
-
-        <input
-          name="location"
-          placeholder="Location"
-          value={formData.location}
-          onChange={handleChange}
-        />
-
-        <select
-          name="status"
-          value={formData.status}
-          onChange={handleChange}
-        >
-          <option value="applied">Applied</option>
-          <option value="interviewing">Interviewing</option>
-          <option value="offer">Offer</option>
-          <option value="rejected">Rejected</option>
-        </select>
-
-        <input
-          name="salary"
-          placeholder="Salary"
-          value={formData.salary}
-          onChange={handleChange}
-        />
-
-        <input
-          type="date"
-          name="date_applied"
-          value={formData.date_applied}
-          onChange={handleChange}
-        />
-
-        <input
-          name="job_link"
-          placeholder="Job Link"
-          value={formData.job_link}
-          onChange={handleChange}
-        />
-
-        <input
-          name="notes"
-          placeholder="Notes"
-          value={formData.notes}
-          onChange={handleChange}
-        />
-
-        <button type="submit">Add Application</button>
-      </form>
-
-      <h2>Applications</h2>
-
-      <div className="search-section">
-          <input
-            className="search-input"
-            placeholder="Search applications..."
-            value={searchTerm}
-            onChange={(event) => setSearchTerm(event.target.value)}
-          />
-          <div className="toolbar">
-            <div className="filter-buttons">
-              <button 
-              className={statusFilter === "all" ? "active-filter" : ""} 
-              onClick={() => setStatusFilter("all")}>All</button>
-              <button 
-              className={statusFilter === "applied" ? "active-filter" : ""} 
-              onClick={() => setStatusFilter("applied")}>Applied</button>
-              <button 
-              className={statusFilter === "interviewing" ? "active-filter" : ""} 
-              onClick={() => setStatusFilter("interviewing")}>Interviewing</button>
-              <button 
-              className={statusFilter === "offer" ? "active-filter" : ""} 
-              onClick={() => setStatusFilter("offer")}>Offer</button>
-              <button 
-              className={statusFilter === "rejected" ? "active-filter" : ""} 
-              onClick={() => setStatusFilter("rejected")}>Rejected</button>
-            </div>
-
-            <select
-              className="sort-select"
-              value={sortOption}
-              onChange={(event) => setSortOption(event.target.value)}
-            >
-              <option value="newest">Newest first</option>
-              <option value="oldest">Oldest first</option>
-              <option value="company">Company A-Z</option>
-              <option value="salary">Salary high to low</option>
-            </select>
-          </div>  
-      </div>
-      
-      {editingApplication && (
-        <form onSubmit={handleEditSubmit}>
-          <input
-            name="company"
-            value={editFormData.company}
-            onChange={handleEditChange}
-          />
-
-          <input
-            name="job_title"
-            value={editFormData.job_title}
-            onChange={handleEditChange}
-          />
-
-          <input
-            name="location"
-            value={editFormData.location}
-            onChange={handleEditChange}
-          />
-
-          <select
-            name="status"
-            value={editFormData.status}
-            onChange={handleEditChange}
-          >
-            <option value="applied">Applied</option>
-            <option value="interviewing">Interviewing</option>
-            <option value="offer">Offer</option>
-            <option value="rejected">Rejected</option>
-          </select>
-
-          <input
-            name="salary"
-            placeholder="Salary"
-            value={editFormData.salary}
-            onChange={handleEditChange}
-          />
-
-          <input 
-          type="date"
-          name="date_applied"
-          value={editFormData.date_applied}
-          onChange={handleEditChange} 
-          />
-
-          <input 
-          name="job_link"
-          placeholder="Job Link"
-          value={editFormData.job_link}
-          onChange={handleEditChange}
-          />
-
-          <input 
-          name="notes"
-          placeholder="Notes"
-          value={editFormData.notes}
-          onChange={handleEditChange}
-           />
-
-          <button type="submit">
-            Save Changes
-          </button>
-
-          <button type="button" onClick={() => setEditingApplication(null)}>
-            Cancel
-          </button>
-        </form>
-      )}
-
-      <p className="results-count">
-        Showing {filteredApplications.length} of {applications.length} applications
-      </p>
-
-      {filteredApplications.length === 0 && (
-        <div className="empty-state">
-          <h3> No applications found</h3>
-          <p> Try changing your search or selected filter</p>
-        </div>
-      )}
-
-      {sortedApplications.map((application) => (
-        <div className="application-card" key={application.id}>
-          <div className="application-main">
-            <div>
-              <h3>{application.company}</h3>
-              <p>{application.job_title}</p>
-            </div>
-
-            <div className="application-details">
-              <span>📍 {application.location || "No location"}</span>
-              <span>💰 {application.salary || "No salary"}</span>
-              <span>📅 {application.date_applied || "No date"}</span>
-            </div>
-
-            <div>
-              <select
-                className={`status status-select ${application.status}`}
-                value={application.status}
-                onChange={(event) =>
-                  handleStatusUpdate(application.id, event.target.value, application)
-                }
-              >
-                <option value="applied">APPLIED</option>
-                <option value="interviewing">INTERVIEWING</option>
-                <option value="offer">OFFER</option>
-                <option value="rejected">REJECTED</option>
-              </select>
-            </div>
-
-          </div>
-
-          {application.notes && (
-            <p className="application-notes">
-               📝 {application.notes}
-            </p>
-          )}
-
-          <div className="application-actions">
-            <a
-              href={application.job_link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              🔗 View Job Posting
-            </a>
-            <div className="action-buttons">
-              <button onClick={() => handleEditClick(application)}>
-                Edit
-              </button>
-
-              <button
-                className="delete-btn"
-                onClick={() => handleDelete(application.id)}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
+    <Routes>
+      <Route path="/" element={<Dashboard applications={applications} />} />
+      <Route path="/dashboard" element={<Dashboard applications={applications} />} />
+      <Route 
+        path="/applications" 
+        element={
+        <Applications 
+          applications={sortedApplications} 
+          handleStatusUpdate={handleStatusUpdate}
+          handleEditClick={handleEditClick}
+          handleDelete={handleDelete}
+          editingApplication={editingApplication}
+          editFormData={editFormData}
+          handleEditChange={handleEditChange}
+          handleEditSubmit={handleEditSubmit}
+          setEditingApplication={setEditingApplication}
+          formData={formData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          />} />
+    </Routes>
+  </div>
   )
 }
 

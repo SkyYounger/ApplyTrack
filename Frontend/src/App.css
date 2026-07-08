@@ -272,3 +272,28 @@ a {
 .recent-card span {
   color: #cbd5e1;
 }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.navbar h2 {
+  margin: 0;
+}
+
+.navbar div {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar a {
+  color: #94a3b8;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  color: white;
+}
