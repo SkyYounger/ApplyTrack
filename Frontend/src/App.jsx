@@ -4,6 +4,12 @@ import {Routes, Route} from "react-router-dom"
 import Dashboard from "./pages/Dashboard"
 import Applications from "./pages/Applications"
 import Navbar from "./components/Navbar"
+import {
+  getApplications,
+  createApplication,
+  updateApplication,
+  deleteApplication,
+} from "./api/applications"
 
 function App() {
   const [applications, setApplications] = useState([])
@@ -94,9 +100,7 @@ function App() {
 
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/applications")
-      .then((response) => response.json())
-      .then((data) => setApplications(data))
+    getApplications().then((data) => setApplications(data))
   }, [])
 
   function handleChange(event) {
@@ -116,16 +120,8 @@ function App() {
   function handleSubmit(event) {
     event.preventDefault()
 
-    fetch("http://127.0.0.1:8000/applications", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((newApplication) => {
-        setApplications([...applications, newApplication])
+    createApplication(formData).then((newApplication) => {
+    setApplications([...applications, newApplication])
 
         setFormData({
           company: "",
@@ -141,9 +137,7 @@ function App() {
   }
 
   function handleDelete(id) {
-    fetch(`http://127.0.0.1:8000/applications/${id}`, {
-      method: "DELETE",
-    }).then(() => {
+    deleteApplication(id).then(() => {
       setApplications(
         applications.filter((application) => application.id !== id)
       )
@@ -168,19 +162,14 @@ function App() {
   function handleEditSubmit(event) {
     event.preventDefault()
 
-    fetch (`http://127.0.0.1:8000/applications/${editingApplication.id}`, {
-      method: "PUT", 
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editFormData),
-    })
-      .then((response) => response.json())
-      .then((updatedApplication) => {
-        setApplications(
-          applications.map((application) =>
-          application.id === updatedApplication.id ? updatedApplication: application
-        )
+    updateApplication(editingApplication.id, editFormData)
+    .then((updatedApplication) => {
+      setApplications(
+        applications.map((application) =>
+          application.id === updatedApplication.id
+            ? updatedApplication
+            : application
+          )
         )
         setEditingApplication(null)
       })
@@ -192,14 +181,7 @@ function App() {
       status: newStatus,
     }
 
-    fetch(`http://127.0.0.1:8000/applications/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedApplication),
-    })
-      .then((response) => response.json())
+    updateApplication(id, updatedApplication)
       .then((updatedData) => {
         setApplications(
           applications.map((app) =>
