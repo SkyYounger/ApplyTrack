@@ -245,7 +245,31 @@ a {
 .sort-select {
   width: 180px;
   background: #182235;
-  border: 1px solid;
+  border: 1px solid #334155;
+}
+
+.recent-section {
+  margin-top: 36px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  margin: 0;
+}
+
+.section-header a {
+  color: #93c5fd;
+  font-size: 14px;
+}
+
+.section-header a:hover {
+  color: white;
 }
 
 .recent-list {
@@ -256,9 +280,17 @@ a {
 }
 
 .recent-card {
-  background: 1px solid #263244;
+  background: #101827;
+  border: 1px solid #263244;
   border-radius: 10px;
-  padding: 16px;
+  padding: 18px;
+}
+
+.recent-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
 }
 
 .recent-card h3 {
@@ -266,11 +298,31 @@ a {
 }
 
 .recent-card p {
+  margin: 0;
   color: #94a3b8;
 }
 
-.recent-card span {
+.recent-status {
+  font-size: 11px;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+
+.recent-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 18px;
   color: #cbd5e1;
+  font-size: 14px;
+}
+
+.recent-empty {
+  background: #101827;
+  border: 1px dashed #334155;
+  border-radius: 10px;
+  padding: 24px;
+  color: #94a3b8;
 }
 
 .navbar {
@@ -296,4 +348,24 @@ a {
 
 .navbar a:hover {
   color: white;
+}
+
+@media (max-width: 900px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .recent-list {
+    grid-template-columns: 1fr;
+  }
+
+  .application-main {
+    grid-template-columns: 1fr;
+  }
+
+  .toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
 }
