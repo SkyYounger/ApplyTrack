@@ -216,6 +216,12 @@ function App() {
           formData={formData}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+          sortOption={sortOption}
+          setSortOption={setSortOption}
           />} />
     </Routes>
   </div>

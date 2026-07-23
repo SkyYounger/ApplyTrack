@@ -1,6 +1,6 @@
 import AddApplicationForm from "../components/AddApplicationForm"
 import ApplicationList from "../components/ApplicationList"
-
+import SearchToolbar from "../components/SearchToolbar"
 
 function Applications({ 
   applications,
@@ -15,10 +15,30 @@ function Applications({
   formData,
   handleChange,
   handleSubmit,
+  searchTerm,
+  setSearchTerm,
+  statusFilter,
+  setStatusFilter,
+  sortOption,
+  setSortOption,
  }) {
   return (
     <>
       <h1>Applications</h1>
+
+      <SearchToolbar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        statusFilter={statusFilter}
+        setStatusFilter={setStatusFilter}
+        sortOption={sortOption}
+        setSortOption={setSortOption}
+      />
+
+      <p className="results-count">
+        {applications.length} application
+        {applications.length !==1 ? "s" : ""} found
+      </p>
 
       <AddApplicationForm
         formData={formData}
@@ -93,12 +113,19 @@ function Applications({
         </form>
       )}
 
-      <ApplicationList
-        applications={applications}
-        handleStatusUpdate={handleStatusUpdate}
-        handleEditClick={handleEditClick}
-        handleDelete={handleDelete}
-      />
+      {applications.length === 0 ? (
+        <div className="empty-state">
+          <h3>No applications found</h3>
+          <p>Try changing your search or status filter.</p>
+        </div>
+      ) : (
+        <ApplicationList
+          applications={applications}
+          handleStatusUpdate={handleStatusUpdate}
+          handleEditClick={handleEditClick}
+          handleDelete={handleDelete}
+        />
+      )}
     </>
   )
 }
