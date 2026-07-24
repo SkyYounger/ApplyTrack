@@ -355,6 +355,10 @@ a {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
   .recent-list {
     grid-template-columns: 1fr;
   }
@@ -368,4 +372,22 @@ a {
     flex-direction: column;
     gap: 16px;
   }
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 20px;
+  align-items: start;
+  margin-top: 24px;
+}
+
+.dashboard-grid .card,
+.dashboard-grid .recent-section {
+  margin-top: 0;
+}
+
+.dashboard-grid .recent-list {
+  grid-template-columns: 1fr;
+  margin-bottom: 0;
 }

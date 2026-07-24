@@ -1,5 +1,6 @@
 import RecentApplications from "../components/RecentApplications"
 import StatsCards from "../components/StatsCards"
+import ApplicationChart from "../components/ApplicationChart"
 
 function Dashboard({ applications }) {
   return (
@@ -9,7 +10,11 @@ function Dashboard({ applications }) {
 
       <StatsCards applications={applications} />
 
-      <RecentApplications applications={applications} />
+      <div className="dashboard-grid">
+          <ApplicationChart applications={applications} />
+          <RecentApplications applications={applications} />
+      </div>
+
     </>
   )
 }
