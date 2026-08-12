@@ -12,6 +12,10 @@ import {
   deleteApplication,
 } from "./api/applications"
 
+function parseSalary(salary) {
+  return Number(String(salary ?? "").replace(/[^0-9.-]/g, "")) || 0
+}
+
 function App() {
   const [applications, setApplications] = useState([])
 
@@ -89,7 +93,7 @@ function App() {
     }
 
     if (sortOption === "salary") {
-      return Number(b.salary) - Number(a.salary)
+      return parseSalary(b.salary) - parseSalary(a.salary)
     }
 
     return 0
