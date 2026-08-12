@@ -391,3 +391,92 @@ a {
   grid-template-columns: 1fr;
   margin-bottom: 0;
 }
+
+.application-details-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.details-card {
+  background: #101827;
+  border: 1px solid #263244;
+  border-radius: 12px;
+  padding: 28px;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #263244;
+}
+
+.details-header h1 {
+  margin: 0 0 8px;
+}
+
+.details-header p {
+  margin: 0;
+  color: #94a3b8;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.details-label {
+  color: #94a3b8;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.details-grid p,
+.details-notes p {
+  margin: 8px 0 0;
+}
+
+.details-notes {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #263244;
+}
+
+.details-btn,
+.job-link-button {
+  display: inline-block;
+  background: #2563eb;
+  font-size: 14px;
+  color: white;
+  padding: 14px 14px;
+  border-radius: 14px;
+}
+
+.job-link-button {
+  margin-top: 24px;
+}
+
+.details-btn:hover,
+.job-link-button:hover {
+  background: #1d4ed8;
+}
+
+@media (max-width: 600px) {
+  .details-header {
+    flex-direction: column;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+}

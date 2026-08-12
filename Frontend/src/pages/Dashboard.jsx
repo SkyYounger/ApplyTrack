@@ -14,7 +14,6 @@ function Dashboard({ applications }) {
           <ApplicationChart applications={applications} />
           <RecentApplications applications={applications} />
       </div>
-
     </>
   )
 }

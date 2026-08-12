@@ -4,6 +4,16 @@ export function getApplications() {
     return fetch (`${API_URL}/applications`).then ((response) => response.json())
 }
 
+export function getApplication(id) {
+    return fetch (`${API_URL}/applications/${id}`).then((response) => {
+        if (!response.ok) {
+            throw new Error("Applicaion not found")
+        }
+
+        return response.json()
+    })
+}
+
 export function createApplication(application) {
     return fetch(`${API_URL}/applications`, {
         method: "POST",

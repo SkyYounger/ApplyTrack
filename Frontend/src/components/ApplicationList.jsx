@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 function ApplicationList({
   applications,
   handleStatusUpdate,
@@ -15,9 +17,9 @@ function ApplicationList({
             </div>
 
             <div className="application-details">
-              <span>📍 {application.location || "No location"}</span>
-              <span>💰 {application.salary || "No salary"}</span>
-              <span>📅 {application.date_applied || "No date"}</span>
+              <span> {application.location || "No location"}</span>
+              <span> {application.salary || "No salary"}</span>
+              <span> {application.date_applied || "No date"}</span>
             </div>
 
             <div>
@@ -38,7 +40,7 @@ function ApplicationList({
 
           {application.notes && (
             <p className="application-notes">
-              📝 {application.notes}
+               {application.notes}
             </p>
           )}
 
@@ -48,10 +50,17 @@ function ApplicationList({
               target="_blank"
               rel="noopener noreferrer"
             >
-              🔗 View Job Posting
+               View Job Posting
             </a>
 
             <div className="action-buttons">
+              <Link
+                  className="details-btn"
+                  to={`/applications/${application.id}`}
+              >
+                View Details
+              </Link>
+              
               <button onClick={() => handleEditClick(application)}>
                 Edit
               </button>

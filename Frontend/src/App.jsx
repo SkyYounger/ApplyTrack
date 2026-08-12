@@ -4,6 +4,7 @@ import {Routes, Route} from "react-router-dom"
 import Dashboard from "./pages/Dashboard"
 import Applications from "./pages/Applications"
 import Navbar from "./components/Navbar"
+import ApplicationDetails from "./pages/ApplicationDetails"
 import {
   getApplications,
   createApplication,
@@ -223,6 +224,10 @@ function App() {
           sortOption={sortOption}
           setSortOption={setSortOption}
           />} />
+      <Route
+          path="/applications/:id"
+          element={<ApplicationDetails />}
+      />
     </Routes>
   </div>
   )
