@@ -51,6 +51,8 @@ function App() {
 
   const [sortOption, setSortOption] = useState("newest")
 
+  const [error, setError] = useState("")
+
   const applied = applications.filter(
     (application) => application.status.toLowerCase() === "applied"
   ).length
@@ -105,7 +107,14 @@ function App() {
 
 
   useEffect(() => {
-    getApplications().then((data) => setApplications(data))
+    getApplications()
+      .then((data) => {
+        setApplications(data)
+        setError("")
+      })
+      .catch(() => {
+        setError("Could not load applications. Make sure the backend is running.")
+      })
   }, [])
 
   function handleChange(event) {
@@ -201,6 +210,8 @@ function App() {
 
   <div className="container">
     <Navbar />
+
+    {error && <p className="error-message">{error}</p>}
 
     <Routes>
       <Route path="/" element={<Dashboard applications={applications} />} />

@@ -1,17 +1,19 @@
 const API_URL = "http://127.0.0.1:8000"
 
+function handleResponse(response) {
+    if(!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`)
+    }
+
+    return response.json()
+}
+
 export function getApplications() {
-    return fetch (`${API_URL}/applications`).then ((response) => response.json())
+    return fetch (`${API_URL}/applications`).then(handleResponse)
 }
 
 export function getApplication(id) {
-    return fetch (`${API_URL}/applications/${id}`).then((response) => {
-        if (!response.ok) {
-            throw new Error("Applicaion not found")
-        }
-
-        return response.json()
-    })
+    return fetch (`${API_URL}/applications/${id}`).then(handleResponse)
 }
 
 export function createApplication(application) {
@@ -21,7 +23,7 @@ export function createApplication(application) {
             "Content-Type" : "application/json",
         },
         body: JSON.stringify(application),
-    }).then((response) => response.json())
+    }).then(handleResponse)
 }
 
 export function updateApplication(id, application) {
@@ -31,7 +33,7 @@ export function updateApplication(id, application) {
             "Content-Type": "application/json"
         },
         body:JSON.stringify(application),
-    }).then((response) => response.json())
+    }).then(handleResponse)
 }
 
 export function deleteApplication(id) {
