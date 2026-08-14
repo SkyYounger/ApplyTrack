@@ -43,8 +43,6 @@ function App() {
 
   const [editingApplication, setEditingApplication] = useState(null)
 
-  const totalApplications = applications.length
-
   const [searchTerm, setSearchTerm] = useState("")
 
   const [statusFilter, setStatusFilter] = useState("all")
@@ -52,22 +50,6 @@ function App() {
   const [sortOption, setSortOption] = useState("newest")
 
   const [error, setError] = useState("")
-
-  const applied = applications.filter(
-    (application) => application.status.toLowerCase() === "applied"
-  ).length
-
-  const interviewing = applications.filter(
-    (application) => application.status.toLowerCase() === "interviewing"
-  ).length
-
-  const offers = applications.filter(
-    (application) => application.status.toLowerCase() === "offer"
-  ).length
-
-  const rejected = applications.filter(
-    (application) => application.status.toLowerCase() === "rejected"
-  ).length
 
   const filteredApplications = applications.filter((application) => {
     const matchesSearch =
@@ -100,10 +82,6 @@ function App() {
 
     return 0
   })
-
-  const recentApplications = [...applications]
-    .sort((a, b) => new Date(b.date_applied) - new Date(a.date_applied))
-    .slice(0, 3)
 
 
   useEffect(() => {
