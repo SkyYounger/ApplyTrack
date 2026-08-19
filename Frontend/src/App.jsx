@@ -113,7 +113,10 @@ function App() {
     event.preventDefault()
 
     createApplication(formData).then((newApplication) => {
-    setApplications([...applications, newApplication])
+    setApplications((currentApplications) => [
+      ...currentApplications,
+      newApplication,
+    ])
 
         setFormData({
           company: "",
@@ -130,8 +133,8 @@ function App() {
 
   function handleDelete(id) {
     deleteApplication(id).then(() => {
-      setApplications(
-        applications.filter((application) => application.id !== id)
+      setApplications((currentApplications) =>
+        currentApplications.filter((application) => application.id !== id)
       )
     })
   }
@@ -156,8 +159,8 @@ function App() {
 
     updateApplication(editingApplication.id, editFormData)
     .then((updatedApplication) => {
-      setApplications(
-        applications.map((application) =>
+      setApplications((currentApplications) =>
+        currentApplications.map((application) =>
           application.id === updatedApplication.id
             ? updatedApplication
             : application
@@ -175,8 +178,8 @@ function App() {
 
     updateApplication(id, updatedApplication)
       .then((updatedData) => {
-        setApplications(
-          applications.map((app) =>
+        setApplications((currentApplications) =>
+          currentApplications.map((app) =>
             app.id === id ? updatedData : app
           )
         )
