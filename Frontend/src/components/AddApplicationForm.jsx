@@ -6,6 +6,7 @@ function AddApplicationForm({ formData, handleChange, handleSubmit }) {
         placeholder="Company"
         value={formData.company}
         onChange={handleChange}
+        required
       />
 
       <input
@@ -13,6 +14,7 @@ function AddApplicationForm({ formData, handleChange, handleSubmit }) {
         placeholder="Job Title"
         value={formData.job_title}
         onChange={handleChange}
+        required
       />
 
       <input
@@ -48,7 +50,7 @@ function AddApplicationForm({ formData, handleChange, handleSubmit }) {
       />
 
       <input
-        name="job_link"
+        name="url"
         placeholder="Job Link"
         value={formData.job_link}
         onChange={handleChange}
