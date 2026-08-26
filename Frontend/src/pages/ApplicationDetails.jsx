@@ -30,7 +30,7 @@ function ApplicationDetails() {
         return (
             <div className="empty-state">
                 <h2>{error}</h2>
-                <Link to="applications">Back to applications</Link>
+                <Link to="/applications">Back to applications</Link>
             </div>
         )
     }
