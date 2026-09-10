@@ -1,10 +1,10 @@
 import schemas
 import models
 from models import Application
-from database import engine
-from fastapi import FastAPI, HTTPException
-from database import SessionLocal
 from fastapi.middleware.cors import CORSMiddleware
+from database import engine, get_db
+from fastapi import Depends, FastAPI, HTTPException
+from sqlalchemy.orm import Session
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -19,25 +19,18 @@ app.add_middleware(
 )
 
 @app.get("/applications")
-def get_applications():
-    db = SessionLocal()
-
-    applications = db.query(Application).all()
-
-    db.close()
+def get_applications(db: Session = Depends(get_db)):
     
-    return applications
+    return db.query(Application).all()
 
 # Getting a specific applicaiton
 @app.get("/applications/{application_id}")
-def get_application(application_id: int):
-    db = SessionLocal()
+def get_application(application_id: int,
+                    db: Session = Depends(get_db)):
 
     application = db.query(Application).filter(
         Application.id == application_id
     ).first()
-
-    db.close()
 
     if application is None:
         raise HTTPException(status_code=404, detail="Application not found")
@@ -45,8 +38,8 @@ def get_application(application_id: int):
     return application
 
 @app.post("/applications")
-def create_application(application: schemas.ApplicationCreate):
-    db = SessionLocal()
+def create_application(application: schemas.ApplicationCreate,
+                       db: Session = Depends(get_db)):
 
     new_application = Application(
         company = application.company,
@@ -62,42 +55,38 @@ def create_application(application: schemas.ApplicationCreate):
     db.add(new_application)
     db.commit()
     db.refresh(new_application)
-    db.close()
 
     return new_application
 
 @app.delete("/applications/{application_id}")
-def delete_application(application_id: int):
-    db = SessionLocal()
+def delete_application(application_id: int,
+                       db: Session = Depends(get_db)):
 
     application = db.query(Application).filter(
         Application.id == application_id
     ).first()
 
     if application is None:
-        db.close()
         raise HTTPException(status_code=404, detail="Application not found")
     
     db.delete(application)
     db.commit()
-    db.close()
 
     return {"message": "Application deleted successfully"}
 
 @app.put("/applications/{application_id}")
 def update_application(
     application_id: int,
-    updated_application: schemas.ApplicationCreate
+    updated_application: schemas.ApplicationCreate,
+    db: Session = Depends(get_db)
     ):
 
-    db = SessionLocal()
 
     application = db.query(Application).filter(
         Application.id == application_id
     ).first()
 
     if application is None:
-        db.close()
         raise HTTPException(status_code=404, detail="Application not found")
     
     application.company = updated_application.company
@@ -111,7 +100,6 @@ def update_application(
 
     db.commit()
     db.refresh(application)
-    db.close()
 
     return application
     
