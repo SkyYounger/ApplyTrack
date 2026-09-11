@@ -36,8 +36,10 @@ function AddApplicationForm({ formData, handleChange, handleSubmit }) {
       </select>
 
       <input
+        type="number"
         name="salary"
         placeholder="Salary"
+        min="0"
         value={formData.salary}
         onChange={handleChange}
       />

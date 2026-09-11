@@ -78,8 +78,10 @@ function Applications({
           </select>
 
           <input
+            type="number"
             name="salary"
             placeholder="Salary"
+            min="0"
             value={editFormData.salary}
             onChange={handleEditChange}
           />
