@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from datetime import date
 
 class ApplicationCreate(BaseModel):
     company: str
@@ -6,6 +7,7 @@ class ApplicationCreate(BaseModel):
     status: str
     salary: str
     location: str
-    date_applied: str
+    date_applied: date | None = None
     job_link: str
     notes: str
+    interview_date: date | None = None

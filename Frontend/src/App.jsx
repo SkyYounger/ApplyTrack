@@ -16,6 +16,14 @@ function parseSalary(salary) {
   return Number(String(salary ?? "").replace(/[^0-9.-]/g, "")) || 0
 }
 
+function prepareApplicationData(data) {
+  return {
+    ...data,
+    date_applied: data.date_applied || null,
+    interview_date: data.interview_date || null,
+  }
+}
+
 function App() {
   const [applications, setApplications] = useState([])
 
@@ -26,6 +34,7 @@ function App() {
     salary: "",
     location: "",
     date_applied: "",
+    interview_date: "",
     job_link: "",
     notes: "",
   })
@@ -37,6 +46,7 @@ function App() {
     salary: "",
     location: "",
     date_applied: "",
+    interview_date: "",
     job_link: "",
     notes: "",
   })
@@ -112,7 +122,7 @@ function App() {
   function handleSubmit(event) {
     event.preventDefault()
 
-    createApplication(formData).then((newApplication) => {
+    createApplication(prepareApplicationData(formData)).then((newApplication) => {
     setApplications((currentApplications) => [
       ...currentApplications,
       newApplication,
@@ -125,6 +135,7 @@ function App() {
           salary: "",
           location: "",
           date_applied: "",
+          interview_date: "",
           job_link: "",
           notes: "",
         })
@@ -149,6 +160,7 @@ function App() {
       salary: application.salary,
       location: application.location,
       date_applied: application.date_applied,
+      interview_date: application.interview_date || "",
       job_link: application.job_link,
       notes: application.notes,
     })
@@ -157,7 +169,9 @@ function App() {
   function handleEditSubmit(event) {
     event.preventDefault()
 
-    updateApplication(editingApplication.id, editFormData)
+    updateApplication(
+      editingApplication.id, 
+      prepareApplicationData(editFormData))
     .then((updatedApplication) => {
       setApplications((currentApplications) =>
         currentApplications.map((application) =>

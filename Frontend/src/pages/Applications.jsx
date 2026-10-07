@@ -77,6 +77,20 @@ function Applications({
             <option value="rejected">Rejected</option>
           </select>
 
+          {editFormData.status === "interviewing" && (
+            <div className="form-field">
+              <label>Interview Date</label>
+
+              <input
+                type="date"
+                name="interview_date"
+                value={editFormData.interview_date}
+                onChange={handleEditChange}
+              />
+            </div>
+          
+          )}
+
           <input
             type="number"
             name="salary"

@@ -77,6 +77,14 @@ function ApplicationDetails() {
                         <span className="details-label">Status</span>
                         <p>{application.status}</p>
                     </div>
+
+                    {application.interview_date && (
+                    <div>
+                        <span className="details-label">Interview Date</span>
+                        <p>{application.interview_date}</p>
+                    </div>
+                )}
+
                 </div>
 
                 <div className="details-notes">

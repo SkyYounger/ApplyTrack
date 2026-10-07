@@ -488,3 +488,14 @@ a {
   background: #7f1d1d;
   color: white;
 }
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  color: #94a3b8;
+  font-size: 13px;
+}

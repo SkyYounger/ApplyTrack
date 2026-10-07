@@ -44,15 +44,28 @@ function AddApplicationForm({ formData, handleChange, handleSubmit }) {
         onChange={handleChange}
       />
 
-      <input
-        type="date"
-        name="date_applied"
-        value={formData.date_applied}
-        onChange={handleChange}
-      />
+      <div className="form-field">
+        <input
+          type="date"
+          name="date_applied"
+          value={formData.date_applied}
+          onChange={handleChange}
+        />
+      </div>
+
+      {formData.status === "interviewing" && (
+        <div className="form-field">
+          <input
+            type="date"
+            name="interview_date"
+            value={formData.interview_date}
+            onChange={handleChange}
+          />
+        </div>
+      )}
 
       <input
-        name="url"
+        name="job_link"
         placeholder="Job Link"
         value={formData.job_link}
         onChange={handleChange}

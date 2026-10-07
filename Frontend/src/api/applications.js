@@ -25,6 +25,7 @@ export function createApplication(application) {
         },
         body: JSON.stringify(application),
     }).then(handleResponse)
+
 }
 
 export function updateApplication(id, application) {
