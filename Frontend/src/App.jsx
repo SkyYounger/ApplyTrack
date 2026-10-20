@@ -143,10 +143,16 @@ function App() {
   }
 
   function handleDelete(id) {
-    deleteApplication(id).then(() => {
-      setApplications((currentApplications) =>
-        currentApplications.filter((application) => application.id !== id)
+    setError("")
+
+    deleteApplication(id)
+      .then(() => {
+        setApplications((currentApplications) =>
+          currentApplications.filter((application) => application.id !== id)
       )
+    })
+    .catch(() => {
+      setError("Could not delete the application :(. Please try again.")
     })
   }
 
