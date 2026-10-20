@@ -121,6 +121,7 @@ function App() {
 
   function handleSubmit(event) {
     event.preventDefault()
+    setError()
 
     createApplication(prepareApplicationData(formData)).then((newApplication) => {
     setApplications((currentApplications) => [
@@ -139,6 +140,9 @@ function App() {
           job_link: "",
           notes: "",
         })
+      })
+      .catch(() => {
+        setError("Could not add the application :(. Please try again")
       })
   }
 
