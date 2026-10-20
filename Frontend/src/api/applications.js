@@ -41,5 +41,5 @@ export function updateApplication(id, application) {
 export function deleteApplication(id) {
     return fetch(`${API_URL}/applications/${id}`, {
         method: "DELETE",
-    })
+    }).then(handleResponse)
 }
