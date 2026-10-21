@@ -178,6 +178,7 @@ function App() {
 
   function handleEditSubmit(event) {
     event.preventDefault()
+    setError("")
 
     updateApplication(
       editingApplication.id, 
@@ -192,9 +193,14 @@ function App() {
         )
         setEditingApplication(null)
       })
+      .catch(() => {
+        setError("Could not update the application :(. Please try again.")
+      })
   }
 
   function handleStatusUpdate(id, newStatus, application) {
+    setError("")
+
     const updatedApplication = {
       ...application,
       status: newStatus,
@@ -207,6 +213,9 @@ function App() {
             app.id === id ? updatedData : app
           )
         )
+      })
+      .catch(() => {
+        setError("Could not update the application status :(. Please try again.")
       })
   }
    
