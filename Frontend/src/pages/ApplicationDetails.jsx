@@ -2,6 +2,21 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { getApplication } from "../api/applications"
 
+function formatSalary(salary) {
+    if (salary === null || salary === undefined || salary === "") {
+        return "Not Provided"
+    }
+
+    const cleanedSalary = String(salary).replace (/[^0-9.-]/g, "")
+    const numericSalary = Number(cleanedSalary)
+
+    if (!Number.isFinite(numericSalary)) {
+        return "Not Provided"
+    }
+
+    return `$${numericSalary.toLocaleString()}`
+}
+
 function ApplicationDetails() {
     const { id } = useParams()
 
@@ -62,9 +77,7 @@ function ApplicationDetails() {
                     <div>
                         <span className="details-label">Salary</span>
                         <p>
-                            {application.salary
-                            ? `$${Number(application.salary).toLocaleString()}`
-                            : "Not provided"}
+                            {formatSalary(application.salary)}
                         </p>
                     </div>
 
