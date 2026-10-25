@@ -62,10 +62,13 @@ function App() {
   const [error, setError] = useState("")
 
   const filteredApplications = applications.filter((application) => {
+
+    const normalizedSearch = searchTerm.toLowerCase()
+    
     const matchesSearch =
-      application.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      application.job_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      application.location.toLowerCase().includes(searchTerm.toLowerCase())
+      (application.company ?? "").toLowerCase().includes(normalizedSearch) ||
+      (application.job_title ?? "").toLowerCase().includes(normalizedSearch) ||
+      (application.location ?? "").toLowerCase().includes(normalizedSearch)
     
     const matchesStatus = 
       statusFilter === "all" || application.status === statusFilter
