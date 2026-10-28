@@ -1,6 +1,7 @@
 import RecentApplications from "../components/RecentApplications"
 import StatsCards from "../components/StatsCards"
 import ApplicationChart from "../components/ApplicationChart"
+import UpcomingInterviews from "../components/UpcomingInterviews"
 
 function Dashboard({ applications }) {
   return (
@@ -14,6 +15,8 @@ function Dashboard({ applications }) {
           <ApplicationChart applications={applications} />
           <RecentApplications applications={applications} />
       </div>
+
+      <UpcomingInterviews applications={applications} />
     </>
   )
 }

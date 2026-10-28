@@ -499,3 +499,72 @@ a {
   color: #94a3b8;
   font-size: 13px;
 }
+
+.upcoming-section {
+  margin-top: 36px;
+}
+
+.upcoming-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.upcoming-card {
+  background: #101827;
+  border: 1px solid #263244;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  color: white;
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+
+.upcoming-card h3 {
+  margin: 0 0 6px;
+}
+
+.upcoming-card p {
+  margin: 0;
+  color: #94a3b8;
+}
+
+.upcoming-date {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: right;
+}
+
+.upcoming-date span {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.upcoming-date strong {
+  color: #93c5fd;
+}
+
+@media (max-width: 900px) {
+  .upcoming-list {
+    grid-template-columns: 1fr;
+  }
+
+  .upcoming-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .upcoming-date {
+    text-align: left;
+  }
+}
+
+.upcoming-card:hover {
+  border-color: #3b82f6;
+  cursor: pointer;
+}
