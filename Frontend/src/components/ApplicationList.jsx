@@ -45,14 +45,17 @@ function ApplicationList({
           )}
 
           <div className="application-actions">
-            <a
-              href={application.job_link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            {application.job_link && (
+              <a
+                href={application.job_link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                View Job Posting
             </a>
 
+            )}
+            
             <div className="action-buttons">
               <Link
                   className="details-btn"
