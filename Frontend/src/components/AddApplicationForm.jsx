@@ -64,6 +64,18 @@ function AddApplicationForm({ formData, handleChange, handleSubmit }) {
         </div>
       )}
 
+      <div className="form-field">
+        <label htmlFor="follow_up_date">Follow-Up Date</label>
+
+        <input
+          type="date"
+          id="follow_up_date"
+          name="follow_up_date"
+          value={formData.follow_up_date}
+          onChange={handleChange}
+        />
+      </div>
+
       <input
         name="job_link"
         placeholder="Job Link"

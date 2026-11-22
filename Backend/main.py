@@ -51,6 +51,8 @@ def create_application(application: schemas.ApplicationCreate,
         job_link = application.job_link,
         notes = application.notes,
         interview_date = application.interview_date,
+        follow_up_date=application.follow_up_date,
+        follow_up_completed=application.follow_up_completed,
     )
     
     db.add(new_application)
@@ -99,6 +101,8 @@ def update_application(
     application.job_link = updated_application.job_link
     application.notes = updated_application.notes
     application.interview_date = updated_application.interview_date
+    application.follow_up_date = updated_application.follow_up_date
+    application.follow_up_completed = updated_application.follow_up_completed
 
     db.commit()
     db.refresh(application)

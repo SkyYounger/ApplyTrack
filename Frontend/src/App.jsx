@@ -35,8 +35,11 @@ function App() {
     location: "",
     date_applied: "",
     interview_date: "",
+    follow_up_date: "",
+    follow_up_completed: false,
     job_link: "",
     notes: "",
+    
   })
 
   const [editFormData, setEditFormData] = useState({
@@ -47,6 +50,8 @@ function App() {
     location: "",
     date_applied: "",
     interview_date: "",
+    follow_up_date: "",
+    follow_up_completed: false,
     job_link: "",
     notes: "",
   })
@@ -124,7 +129,7 @@ function App() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    setError()
+    setError("")
 
     createApplication(prepareApplicationData(formData)).then((newApplication) => {
     setApplications((currentApplications) => [
@@ -140,6 +145,8 @@ function App() {
           location: "",
           date_applied: "",
           interview_date: "",
+          follow_up_date: "",
+          follow_up_completed: false,
           job_link: "",
           notes: "",
         })
@@ -174,6 +181,8 @@ function App() {
       location: application.location,
       date_applied: application.date_applied,
       interview_date: application.interview_date || "",
+      follow_up_date: application.follow_up_date || "",
+      follow_up_completed: application.follow_up_completed ?? false,
       job_link: application.job_link,
       notes: application.notes,
     })
@@ -255,6 +264,7 @@ function App() {
           setStatusFilter={setStatusFilter}
           sortOption={sortOption}
           setSortOption={setSortOption}
+          setEditFormData={setEditFormData}
           />} />
       <Route
           path="/applications/:id"

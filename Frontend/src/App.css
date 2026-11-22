@@ -569,3 +569,90 @@ a {
   border-color: #3b82f6;
   cursor: pointer;
 }
+
+.follow-up-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  color: #cbd5e1;
+  cursor: pointer;
+}
+
+.follow-up-checkbox input {
+  width: 16px;
+  height: 16px;
+  accent-color: #3b82f6;
+}
+
+.follow-up-section {
+  margin-top: 36px;
+}
+
+.follow-up-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 16px;
+}
+
+.follow-up-group {
+  background: #101827;
+  border: 1px solid #263244;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.follow-up-group h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.follow-up-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px;
+  margin-bottom: 10px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+
+.follow-up-card:hover {
+  border-color: #3b82f6;
+}
+
+.follow-up-card h4 {
+  margin: 0 0 6px;
+}
+
+.follow-up-card p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.follow-up-date {
+  color: #93c5fd;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.follow-up-date.overdue {
+  color: #f87171;
+}
+
+@media (max-width: 900px) {
+  .follow-up-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .follow-up-card {
+    flex-wrap: wrap;
+  }
+}

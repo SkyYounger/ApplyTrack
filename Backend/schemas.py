@@ -11,3 +11,5 @@ class ApplicationCreate(BaseModel):
     job_link: str
     notes: str
     interview_date: date | None = None
+    follow_up_date: date | None = None
+    follow_up_completed: bool = False

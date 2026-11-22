@@ -96,8 +96,25 @@ function ApplicationDetails() {
                         <span className="details-label">Interview Date</span>
                         <p>{application.interview_date}</p>
                     </div>
-                )}
+                    )}
 
+                    {application.follow_up_date && (
+                        <div>
+                            <span className="details-label">Follow-Up Date</span>
+                            <p>{application.follow_up_date}</p>
+                        </div>
+                    )}
+
+                    {application.follow_up_date && (
+                        <div>
+                            <span className="details-label">Follow-Up Status</span>
+                            <p>
+                                {application.follow_up_completed
+                                    ? "Completed"
+                                    : "Pending"}
+                            </p>
+                        </div>
+                    )}
                 </div>
 
                 <div className="details-notes">

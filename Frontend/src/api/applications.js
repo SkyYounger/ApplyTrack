@@ -23,7 +23,11 @@ export function createApplication(application) {
         headers: {
             "Content-Type" : "application/json",
         },
-        body: JSON.stringify(application),
+        body: JSON.stringify({
+            ...application,
+            interview_date: application.interview_date || null,
+            follow_up_date: application.follow_up_date || null,
+        }),
     }).then(handleResponse)
 
 }
@@ -34,7 +38,11 @@ export function updateApplication(id, application) {
         headers: {
             "Content-Type": "application/json"
         },
-        body:JSON.stringify(application),
+        body: JSON.stringify({
+            ...application,
+            interview_date: application.interview_date || null,
+            follow_up_date: application.follow_up_date || null,
+        }),
     }).then(handleResponse)
 }
 

@@ -21,6 +21,7 @@ function Applications({
   setStatusFilter,
   sortOption,
   setSortOption,
+  setEditFormData,
  }) {
   return (
     <>
@@ -88,8 +89,36 @@ function Applications({
                 onChange={handleEditChange}
               />
             </div>
-          
           )}
+
+          <div className="form-field">
+            <label htmlFor="edit-follow-up-date">
+              Follow-Up Date
+            </label>
+
+            <input
+              type="date"
+              id="edit-follow-up-date"
+              name="follow_up_date"
+              value={editFormData.follow_up_date}
+              onChange={handleEditChange}
+            />
+          </div>
+
+          <label className="follow-up-checkbox">
+            <input
+            type="checkbox"
+            name="follow_up_completed"
+            checked={editFormData.follow_up_completed}
+            onChange={(e) =>
+              setEditFormData({
+                ...editFormData,
+                follow_up_completed: e.target.checked
+              })
+            }
+            />
+            Follow-up completed
+          </label>
 
           <input
             type="number"
