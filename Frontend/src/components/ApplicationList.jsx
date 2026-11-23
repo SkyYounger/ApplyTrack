@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { formatCurrency } from "../utils/formatCurrency"
 
 function ApplicationList({
   applications,
@@ -18,7 +19,7 @@ function ApplicationList({
 
             <div className="application-details">
               <span> {application.location || "No location"}</span>
-              <span> {application.salary || "No salary"}</span>
+              <span> {formatCurrency(application.salary)}</span>
               <span> {application.date_applied || "No date"}</span>
             </div>
 
